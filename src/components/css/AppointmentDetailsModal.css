@@ -1,0 +1,140 @@
+.admOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 8, 23, 0.55);
+  backdrop-filter: blur(10px);
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  z-index: 3000;
+}
+
+.admBox {
+  width: min(560px, 96vw);
+  background: rgba(255,255,255,0.95);
+  border: 1px solid rgba(255,255,255,0.55);
+  border-radius: 18px;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.35);
+  padding: 18px;
+}
+
+.admHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.admTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.admX {
+  border: 0;
+  background: rgba(15,23,42,0.06);
+  border: 1px solid rgba(15,23,42,0.10);
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 900;
+  color: rgba(15,23,42,0.8);
+}
+
+.admCard {
+  border-radius: 14px;
+  padding: 14px;
+  border: 1px solid rgba(29, 78, 216, 0.14);
+  background: linear-gradient(180deg, rgba(29,78,216,0.05), rgba(255,255,255,0.85));
+  margin-bottom: 14px;
+}
+
+.admRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(15,23,42,0.08);
+}
+
+.admRow:last-child { border-bottom: 0; }
+
+.admLabel {
+  font-size: 12px;
+  font-weight: 900;
+  color: rgba(15,23,42,0.65);
+}
+
+.admValue {
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--text);
+  text-align: right;
+}
+
+.admBadge {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.admBadge.pending {
+  color: #7a4a00;
+  background: rgba(245, 158, 11, 0.16);
+  border-color: rgba(245, 158, 11, 0.26);
+}
+
+.admBadge.confirmed {
+  color: #065f46;
+  background: rgba(16, 185, 129, 0.14);
+  border-color: rgba(16, 185, 129, 0.25);
+}
+
+.admActions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.admBtnPrimary {
+  border: 0;
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+  color: #fff;
+  font-weight: 900;
+  box-shadow: 0 14px 34px rgba(29, 78, 216, 0.30);
+}
+
+.admBtnPrimary {
+  padding: 12px 18px;
+  border-radius: 14px;
+  border: none;
+
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+  color: #fff;
+
+  font-size: 13px;
+  font-weight: 900;
+
+  cursor: pointer;
+  box-shadow: 0 14px 30px rgba(29, 78, 216, 0.35);
+
+  transition:
+    transform 200ms var(--ease),
+    box-shadow 200ms var(--ease),
+    filter 200ms var(--ease);
+}
+
+.admBtnPrimary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 40px rgba(29, 78, 216, 0.45);
+  filter: brightness(1.05);
+}

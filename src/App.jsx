@@ -1,7 +1,9 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
+
 import Home from "./pages/Home";
 import Appointments from "./pages/Appointments";
+import MyAppointments from "./pages/MyAppointments";
 
 export default function App() {
   return (
@@ -10,6 +12,10 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/appointments" element={<Appointments />} />
+        <Route path="/my-appointments" element={<MyAppointments />} />
+
+        {/* fallback */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
   );

@@ -7,8 +7,8 @@ function Appointments() {
   const dummySlots = [
     {
       id: "1",
-      doctor: "Dr. Ahmad",
-      specialty: "Dentistry",
+      doctor: "Dr. Ahmad Labadi",
+      specialty: "General Dentistry",
       service: "General Checkup",
       date: "2026-01-20",
       time: "10:00 AM",
@@ -23,7 +23,7 @@ function Appointments() {
     },
     {
       id: "3",
-      doctor: "Dr. Omar",
+      doctor: "Dr. Omar Khatib",
       specialty: "Cosmetic Dentistry",
       service: "Teeth Whitening",
       date: "2026-01-22",
@@ -51,13 +51,11 @@ function Appointments() {
       id: Date.now(),
       status: "Pending",
       slotId: selectedSlot.id,
-
       doctor: selectedSlot.doctor,
       specialty: selectedSlot.specialty,
       service: selectedSlot.service,
       date: selectedSlot.date,
       time: selectedSlot.time,
-
       fullName: patientData.fullName,
       phone: patientData.phone,
       email: patientData.email,
@@ -93,12 +91,10 @@ function Appointments() {
                       <FaCalendarAlt className="slotIcon" />
                       {s.date}
                     </span>
-
                     <span>
                       <FaClock className="slotIcon" />
                       {s.time}
                     </span>
-
                     <span>
                       <FaUserMd className="slotIcon" />
                       {s.service}
