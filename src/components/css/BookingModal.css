@@ -1,0 +1,162 @@
+/* Overlay */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 8, 23, 0.55);
+  backdrop-filter: blur(10px);
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  z-index: 2000;
+  animation: overlayIn 180ms ease-out;
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Modal box */
+.modalBox {
+  width: min(560px, 96vw);
+  background: rgba(255,255,255,0.95);
+  border: 1px solid rgba(255,255,255,0.55);
+  border-radius: 18px;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.35);
+  padding: 18px 18px 16px;
+  animation: modalIn 200ms ease-out;
+}
+
+@keyframes modalIn {
+  from { transform: translateY(10px) scale(0.98); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.modalTitle {
+  margin: 4px 0 12px;
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -0.3px;
+}
+
+/* Slot info card */
+.modalSlotInfo {
+  border-radius: 14px;
+  padding: 14px;
+  border: 1px solid rgba(29, 78, 216, 0.14);
+  background: radial-gradient(520px 160px at 20% 20%, rgba(29,78,216,0.10), transparent 55%),
+              linear-gradient(180deg, rgba(29,78,216,0.05), rgba(255,255,255,0.75));
+  margin-bottom: 14px;
+}
+
+.modalSlotInfo .slotName {
+  font-weight: 900;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.modalSlotInfo .slotSpec {
+  font-weight: 900;
+  color: var(--primary);
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.modalSlotInfo .slotSmall {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* Form */
+.modalForm {
+  display: grid;
+  gap: 10px;
+}
+
+.modalForm label {
+  font-size: 12px;
+  font-weight: 900;
+  color: rgba(15, 23, 42, 0.85);
+  margin-top: 6px;
+}
+
+.modalForm input,
+.modalForm textarea {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: rgba(255,255,255,0.85);
+  padding: 11px 12px;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.modalForm textarea {
+  resize: none;
+}
+
+.modalForm input:focus,
+.modalForm textarea:focus {
+  border-color: rgba(29, 78, 216, 0.45);
+  box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.12);
+}
+
+/* Actions */
+.modalActions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+/* Cancel button */
+.btnGhost {
+  background: rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  color: rgba(15, 23, 42, 0.85);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 900;
+  font-size: 13px;
+  cursor: pointer;
+  transition: transform 200ms ease, background 200ms ease, border-color 200ms ease;
+}
+
+.btnGhost:hover {
+  transform: translateY(-1px);
+  background: rgba(15, 23, 42, 0.08);
+  border-color: rgba(15, 23, 42, 0.14);
+}
+
+/* Confirm button */
+.modalActions .btnPrimary {
+  border: 0;
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+  color: #fff;
+  font-weight: 900;
+  font-size: 13px;
+  box-shadow: 0 14px 34px rgba(29, 78, 216, 0.35);
+  transition: transform 220ms var(--ease), box-shadow 220ms var(--ease), filter 220ms var(--ease);
+}
+
+.modalActions .btnPrimary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 44px rgba(29, 78, 216, 0.45);
+  filter: brightness(1.02);
+}
+
+@media (max-width: 520px) {
+  .modalActions {
+    flex-direction: column;
+  }
+  .btnGhost,
+  .modalActions .btnPrimary {
+    width: 100%;
+  }
+}
