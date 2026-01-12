@@ -1,15 +1,8 @@
-import "./css/MyAppointments.css";
-import {
-  FaUserMd,
-  FaTooth,
-  FaCalendarAlt,
-  FaClock,
-  FaEye,
-  FaTimes,
-} from "react-icons/fa";
+import "../components/css/MyAppointments.css";
+import { FaUserMd, FaTooth, FaCalendarAlt, FaClock, FaEye, FaTimes } from "react-icons/fa";
 
 function MyAppointmentList({ appointments, onCancel, onView }) {
-  if (!appointments || appointments.length === 0) {
+  if (appointments.length === 0) {
     return (
       <div className="myap-empty">
         <p>No booked appointments.</p>
@@ -58,14 +51,10 @@ function MyAppointmentList({ appointments, onCancel, onView }) {
           </div>
 
           <div className="myap-actions">
-            <button
-              className="myap-cancel"
-              onClick={() => onCancel(appt, idx)}
-            >
+            <button className="myap-cancel" onClick={() => onCancel(appt, idx)}>
               <FaTimes />
               Cancel
             </button>
-
             <button className="myap-view" onClick={() => onView(appt)}>
               <FaEye />
               View Details

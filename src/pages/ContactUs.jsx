@@ -16,10 +16,10 @@ function ContactUs() {
     console.log("ContactUs page loaded");
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!fullName.trim() || !email.trim() || !subject.trim() || !message.trim()) {
+    if (!fullName || !email || !subject || !message) {
       setStatus({ type: "error", text: "Please fill all fields." });
       return;
     }
@@ -39,20 +39,27 @@ function ContactUs() {
       },
     };
 
-    try {
-      await axios.post("https://api.emailjs.com/api/v1.0/email/send", data);
+    axios
+      .post("https://api.emailjs.com/api/v1.0/email/send", data)
+      .then(() => {
+        setStatus({ type: "success", text: "Message sent successfully ✅" });
 
-      setStatus({ type: "success", text: "Message sent successfully ✅" });
-      setFullName("");
-      setEmail("");
-      setSubject("");
-      setMessage("");
-    } catch (err) {
-      console.error(err);
-      setStatus({ type: "error", text: "Failed to send message ❌ Try again." });
-    } finally {
-      setLoading(false);
-    }
+        setFullName("");
+        setEmail("");
+        setSubject("");
+        setMessage("");
+
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setStatus({
+          type: "error",
+          text: "Failed to send message ❌ Try again.",
+        });
+
+        setLoading(false);
+      });
   };
 
   return (
@@ -64,6 +71,7 @@ function ContactUs() {
         </p>
 
         <div className="cu-grid">
+          {/* Left card */}
           <div className="cu-card cu-info">
             <h3 className="cu-card-title">Clinic Information</h3>
 
@@ -113,6 +121,7 @@ function ContactUs() {
             </div>
           </div>
 
+          {/* Right card */}
           <div className="cu-card cu-formCard">
             <h3 className="cu-card-title">Send us a message</h3>
 

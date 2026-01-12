@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./css/BookingModal.css";
 
 function BookingModal({ isOpen, onClose, slot, onConfirm }) {
@@ -7,32 +7,28 @@ function BookingModal({ isOpen, onClose, slot, onConfirm }) {
   const [email, setEmail] = useState("");
   const [notes, setNotes] = useState("");
 
-  useEffect(() => {
-    if (isOpen) {
-      setFullName("");
-      setPhone("");
-      setEmail("");
-      setNotes("");
-    }
-  }, [isOpen]);
-
   if (!isOpen || !slot) return null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!fullName.trim() || !phone.trim() || !email.trim()) {
+    if (!fullName || !phone || !email) {
       alert("Please fill Full Name, Phone, and Email.");
       return;
     }
 
     onConfirm({
-      fullName: fullName.trim(),
-      phone: phone.trim(),
-      email: email.trim(),
-      notes: notes.trim(),
+      fullName,
+      phone,
+      email,
+      notes,
     });
 
+    // reset + close
+    setFullName("");
+    setPhone("");
+    setEmail("");
+    setNotes("");
     onClose();
   };
 

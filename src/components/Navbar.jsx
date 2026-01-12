@@ -1,11 +1,12 @@
 import { NavLink } from "react-router-dom";
 import { FaTooth } from "react-icons/fa";
-import "./css/Navbar.css";
+import "../components/css/Navbar.css";
 
-function Navbar({ isLoggedIn, onLogout }) {
+function Navbar({ isLoggedIn }) {
   return (
     <header className="navbar">
       <div className="navbar-inner">
+
         <NavLink to="/" end className="navbar-logo">
           <FaTooth className="logo-icon" />
           <span>Abo Hourani</span>
@@ -29,21 +30,16 @@ function Navbar({ isLoggedIn, onLogout }) {
           </NavLink>
 
           {isLoggedIn ? (
-            <>
-              <NavLink to="/profile" className="nav-link">
-                Profile
-              </NavLink>
-
-              <button className="nav-link" type="button" onClick={onLogout}>
-                Logout
-              </button>
-            </>
+            <NavLink to="/profile" className="nav-btn">
+              Profile
+            </NavLink>
           ) : (
-            <NavLink to="/login" className="nav-link">
+            <NavLink to="/login" className="nav-btn">
               Login
             </NavLink>
           )}
         </nav>
+
       </div>
     </header>
   );

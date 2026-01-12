@@ -59,19 +59,26 @@ function AdminManage() {
   ]);
 
   const approve = (id) => {
-    setBookings(bookings.map((b) => (b.id === id ? { ...b, status: "Approved" } : b)));
+    const updated = bookings.map((b) =>
+      b.id === id ? { ...b, status: "Approved" } : b
+    );
+    setBookings(updated);
   };
 
   const reject = (id) => {
-    setBookings(bookings.map((b) => (b.id === id ? { ...b, status: "Cancelled" } : b)));
+    const updated = bookings.map((b) =>
+      b.id === id ? { ...b, status: "Cancelled" } : b
+    );
+    setBookings(updated);
   };
 
   const remove = (id) => {
-    setBookings(bookings.filter((b) => b.id !== id));
+    const updated = bookings.filter((b) => b.id !== id);
+    setBookings(updated);
   };
 
   return (
-    <AdminLayout>
+    <AdminLayout active="manage">
       <h2 className="adminPageTitle">Manage Appointments</h2>
       <p className="adminPageSub">View and manage all appointment requests</p>
 
@@ -151,20 +158,32 @@ function AdminManage() {
               <div className="adminActions">
                 {b.status === "Pending" ? (
                   <>
-                    <button className="adminBtn adminBtnSuccess" onClick={() => approve(b.id)}>
+                    <button
+                      className="adminBtn adminBtnSuccess"
+                      onClick={() => approve(b.id)}
+                    >
                       <FaCheck /> Approve
                     </button>
 
-                    <button className="adminBtn adminBtnDanger" onClick={() => reject(b.id)}>
+                    <button
+                      className="adminBtn adminBtnDanger"
+                      onClick={() => reject(b.id)}
+                    >
                       <FaTimes /> Reject
                     </button>
 
-                    <button className="adminBtn adminBtnGhost" onClick={() => remove(b.id)}>
+                    <button
+                      className="adminBtn adminBtnGhost"
+                      onClick={() => remove(b.id)}
+                    >
                       <FaTrash /> Delete
                     </button>
                   </>
                 ) : (
-                  <button className="adminBtn adminBtnGhost" onClick={() => remove(b.id)}>
+                  <button
+                    className="adminBtn adminBtnGhost"
+                    onClick={() => remove(b.id)}
+                  >
                     <FaTrash /> Delete
                   </button>
                 )}

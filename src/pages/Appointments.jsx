@@ -1,32 +1,35 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import BookingModal from "../components/BookingModal";
 import "../components/css/Appointments.css";
 import { FaCalendarAlt, FaClock, FaUserMd } from "react-icons/fa";
 
-function Appointments() {
+function Appointments({ isLoggedIn }) {
+  const navigate = useNavigate();
+
   const dummySlots = [
     {
       id: "1",
-      doctor: "Dr. Ahmad Labadi",
-      specialty: "General Dentistry",
-      service: "General Checkup",
-      date: "2026-01-20",
+      doctor: "Dr. Ahmad",
+      specialty: "Dermatology",
+      service: "Skin Check",
+      date: "2025-12-20",
       time: "10:00 AM",
     },
     {
       id: "2",
-      doctor: "Dr. Abdullah Hourani",
-      specialty: "Orthodontics",
-      service: "Braces Consultation",
-      date: "2026-01-21",
+      doctor: "Dr. Sara",
+      specialty: "Dentistry",
+      service: "Teeth Cleaning",
+      date: "2025-12-21",
       time: "01:30 PM",
     },
     {
       id: "3",
-      doctor: "Dr. Omar Khatib",
-      specialty: "Cosmetic Dentistry",
-      service: "Teeth Whitening",
-      date: "2026-01-22",
+      doctor: "Dr. Omar",
+      specialty: "Cardiology",
+      service: "ECG",
+      date: "2025-12-22",
       time: "05:00 PM",
     },
   ];
@@ -37,6 +40,12 @@ function Appointments() {
   const [selectedSlot, setSelectedSlot] = useState(null);
 
   const handleOpenModal = (slot) => {
+    if (!isLoggedIn) {
+      alert("You must login first to book an appointment.");
+      navigate("/login");
+      return;
+    }
+
     setSelectedSlot(slot);
     setOpen(true);
   };
@@ -51,11 +60,13 @@ function Appointments() {
       id: Date.now(),
       status: "Pending",
       slotId: selectedSlot.id,
+
       doctor: selectedSlot.doctor,
       specialty: selectedSlot.specialty,
       service: selectedSlot.service,
       date: selectedSlot.date,
       time: selectedSlot.time,
+
       fullName: patientData.fullName,
       phone: patientData.phone,
       email: patientData.email,
@@ -91,10 +102,12 @@ function Appointments() {
                       <FaCalendarAlt className="slotIcon" />
                       {s.date}
                     </span>
+
                     <span>
                       <FaClock className="slotIcon" />
                       {s.time}
                     </span>
+
                     <span>
                       <FaUserMd className="slotIcon" />
                       {s.service}

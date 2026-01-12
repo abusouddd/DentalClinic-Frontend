@@ -11,12 +11,11 @@ function AdminLogin() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!email.trim() || !password.trim()) {
+    if (!email || !password) {
       alert("Please enter admin credentials");
       return;
     }
 
-    // demo admin auth
     localStorage.setItem("admin_logged_in", "true");
     navigate("/admin/manage");
   };

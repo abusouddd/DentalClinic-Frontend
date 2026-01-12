@@ -10,20 +10,11 @@ function Profile({ setIsLoggedIn }) {
 
   const handleSave = (e) => {
     e.preventDefault();
-
-    if (newPassword || confirmPassword || currentPassword) {
-      if (newPassword !== confirmPassword) {
-        alert("New password and confirm password do not match.");
-        return;
-      }
-    }
-
     alert("Profile updated (demo)");
   };
 
   const handleLogout = () => {
-    if (setIsLoggedIn) setIsLoggedIn(false);
-    alert("Logged out (demo)");
+    setIsLoggedIn(false);
   };
 
   return (
