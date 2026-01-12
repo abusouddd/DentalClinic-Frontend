@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Appointments from "./pages/Appointments";
 import MyAppointments from "./pages/MyAppointments";
+import ContactUs from "./pages/ContactUs";
 
 export default function App() {
   return (
@@ -13,8 +14,8 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/appointments" element={<Appointments />} />
         <Route path="/my-appointments" element={<MyAppointments />} />
+        <Route path="/contact" element={<ContactUs />} />
 
-        {/* fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
