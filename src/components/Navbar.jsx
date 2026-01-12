@@ -19,6 +19,10 @@ function Navbar() {
           <NavLink to="/appointments" className="nav-link">
             Appointments
           </NavLink>
+
+          <NavLink to="/my-appointments" className="nav-link">
+            My Appointments
+          </NavLink>
         </nav>
       </div>
     </header>

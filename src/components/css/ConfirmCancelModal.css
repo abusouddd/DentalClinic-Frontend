@@ -1,0 +1,136 @@
+.ccmOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 8, 23, 0.55);
+  backdrop-filter: blur(10px);
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  z-index: 3000;
+}
+
+.ccmBox {
+  width: min(520px, 96vw);
+  background: rgba(255,255,255,0.95);
+  border: 1px solid rgba(255,255,255,0.55);
+  border-radius: 18px;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.35);
+  padding: 18px;
+}
+
+.ccmTitle {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.ccmText {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.ccmCard {
+  border-radius: 14px;
+  padding: 14px;
+  border: 1px solid rgba(29, 78, 216, 0.14);
+  background: linear-gradient(180deg, rgba(29,78,216,0.05), rgba(255,255,255,0.85));
+  margin-bottom: 14px;
+}
+
+.ccmDoctor { font-weight: 900; color: var(--text); }
+.ccmService { margin-top: 6px; font-weight: 800; color: rgba(15,23,42,0.78); }
+
+.ccmMeta {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ccmMeta span {
+  font-size: 12px;
+  font-weight: 800;
+  color: rgba(15, 23, 42, 0.78);
+  background: rgba(29, 78, 216, 0.06);
+  border: 1px solid rgba(29, 78, 216, 0.10);
+  padding: 7px 10px;
+  border-radius: 999px;
+}
+
+.ccmActions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.ccmBtnGhost {
+  background: rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  color: rgba(15, 23, 42, 0.85);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.ccmBtnDanger {
+  border: 0;
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 14px 34px rgba(239, 68, 68, 0.25);
+}
+
+.ccmBtnGhost {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 14px;
+
+  background: rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.12);
+
+  color: rgba(15, 23, 42, 0.85);
+  font-size: 13px;
+  font-weight: 900;
+
+  cursor: pointer;
+  transition: all 200ms var(--ease);
+}
+
+.ccmBtnGhost:hover {
+  background: rgba(15, 23, 42, 0.10);
+  transform: translateY(-1px);
+}
+
+.ccmBtnDanger {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: none;
+
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  color: #fff;
+
+  font-size: 13px;
+  font-weight: 900;
+
+  cursor: pointer;
+  box-shadow: 0 14px 30px rgba(239, 68, 68, 0.35);
+
+  transition:
+    transform 200ms var(--ease),
+    box-shadow 200ms var(--ease),
+    filter 200ms var(--ease);
+}
+
+.ccmBtnDanger:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 40px rgba(239, 68, 68, 0.45);
+  filter: brightness(1.05);
+}

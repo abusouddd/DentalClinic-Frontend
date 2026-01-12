@@ -333,10 +333,11 @@ function Home() {
             </div>
           </div>
 
-          <div className="footerCol">
+           <div className="footerCol">
             <div className="footerTitle">Quick Links</div>
             <Link to="/">Home</Link>
             <Link to="/appointments">Appointments</Link>
+            <Link to="/my-appointments">My Appointments</Link>
           </div>
 
           <div className="footerCol">

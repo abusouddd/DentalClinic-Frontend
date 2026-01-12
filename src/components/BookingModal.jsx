@@ -7,7 +7,6 @@ function BookingModal({ isOpen, onClose, slot, onConfirm }) {
   const [email, setEmail] = useState("");
   const [notes, setNotes] = useState("");
 
-  // Reset fields whenever modal opens
   useEffect(() => {
     if (isOpen) {
       setFullName("");
