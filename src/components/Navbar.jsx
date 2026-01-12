@@ -27,6 +27,10 @@ function Navbar() {
           <NavLink to="/contact" className="nav-link">
             Contact Us
           </NavLink>
+
+          <NavLink to="/profile" className="nav-link">
+            Profile
+          </NavLink>
         </nav>
       </div>
     </header>
