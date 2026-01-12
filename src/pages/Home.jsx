@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "../components/css/Home.css";
 
 import { FaTooth, FaShieldAlt, FaHeart, FaClock } from "react-icons/fa";
@@ -24,13 +25,13 @@ function Home() {
             </p>
 
             <div className="heroBtns">
-              <a className="btnPrimary" href="#">
+              <Link className="btnPrimary" to="/appointments">
                 Book Appointment <span className="btnArrow">›</span>
-              </a>
+              </Link>
 
-              <a className="btnOutline" href="#">
-                Contact Us
-              </a>
+              <Link className="btnOutline" to="/appointments">
+                View Appointments
+              </Link>
             </div>
           </div>
 
@@ -104,7 +105,7 @@ function Home() {
                 <FaClock />
               </div>
               <h3>Emergency Services</h3>
-              <p>24/7 availability for dental emergencies.</p>
+              <p>Support for urgent dental needs during working hours.</p>
             </div>
           </div>
         </div>
@@ -125,8 +126,8 @@ function Home() {
             </h2>
 
             <p className="whyText">
-              At DentalCare, we combine cutting-edge technology with
-              compassionate care to deliver exceptional dental services.
+              At DentalCare, we combine technology with compassionate care to
+              deliver excellent dental services.
             </p>
 
             <ul className="whyList">
@@ -144,9 +145,9 @@ function Home() {
               </li>
             </ul>
 
-            <a className="learnMore" href="#">
-              Learn More About Us <span>›</span>
-            </a>
+            <Link className="learnMore" to="/appointments">
+              View Appointments <span>›</span>
+            </Link>
           </div>
         </div>
       </section>
@@ -283,9 +284,9 @@ function Home() {
           </div>
 
           <div className="centerBtn">
-            <a className="btnPrimary" href="#">
+            <Link className="btnPrimary" to="/appointments">
               Book Your Appointment <span className="btnArrow">›</span>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -299,9 +300,9 @@ function Home() {
           </h2>
 
           <div className="ctaBtns">
-            <a className="btnPrimary" href="#">
+            <Link className="btnPrimary" to="/appointments">
               Book Appointment <span className="btnArrow">›</span>
-            </a>
+            </Link>
 
             <a className="btnOutlineLight" href="tel:+962000000000">
               Call Now
@@ -334,10 +335,8 @@ function Home() {
 
           <div className="footerCol">
             <div className="footerTitle">Quick Links</div>
-            <a href="#">Home</a>
-            <a href="#">Book Appointment</a>
-            <a href="#">My Appointments</a>
-            <a href="#">Contact Us</a>
+            <Link to="/">Home</Link>
+            <Link to="/appointments">Appointments</Link>
           </div>
 
           <div className="footerCol">
