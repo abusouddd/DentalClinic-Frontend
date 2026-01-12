@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../components/css/Auth.css";
-import { FaLock } from "react-icons/fa";
+import { FaShieldAlt } from "react-icons/fa";
 
-function Login({ setIsLoggedIn }) {
+function AdminLogin() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,30 +12,30 @@ function Login({ setIsLoggedIn }) {
     e.preventDefault();
 
     if (!email.trim() || !password.trim()) {
-      alert("Please fill all fields");
+      alert("Please enter admin credentials");
       return;
     }
 
-    // demo login
-    setIsLoggedIn(true);
-    navigate("/");
+    // demo admin auth
+    localStorage.setItem("admin_logged_in", "true");
+    navigate("/admin/manage");
   };
 
   return (
     <div className="authPage">
       <div className="authCard">
         <div className="authIcon">
-          <FaLock />
+          <FaShieldAlt />
         </div>
 
-        <h1 className="authTitle">Welcome Back</h1>
-        <p className="authSubtitle">Sign in to your account</p>
+        <h1 className="authTitle">Admin Portal</h1>
+        <p className="authSubtitle">Access the admin dashboard</p>
 
         <form className="authForm" onSubmit={handleSubmit}>
-          <label>Email</label>
+          <label>Admin Email</label>
           <input
             type="email"
-            placeholder="your@email.com"
+            placeholder="admin@clinic.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -43,27 +43,24 @@ function Login({ setIsLoggedIn }) {
           <label>Password</label>
           <input
             type="password"
-            placeholder="Enter your password"
+            placeholder="Admin password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
 
           <button className="authButton" type="submit">
-            Sign In
+            Sign In as Admin
           </button>
         </form>
 
         <div className="authFooter">
           <p>
-            Don’t have an account? <Link to="/signup">Sign up</Link>
+            <Link to="/login">← Back to User Login</Link>
           </p>
-
-<p>
-            <Link to="/admin">Admin Login</Link>
-          </p>        </div>
+        </div>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default AdminLogin;

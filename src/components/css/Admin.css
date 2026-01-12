@@ -1,0 +1,499 @@
+/* Admin Shell */
+.adminShell {
+  min-height: 100vh;
+  background: radial-gradient(900px 280px at 15% 0%, rgba(29,78,216,0.08), transparent 60%),
+              radial-gradient(800px 240px at 85% 10%, rgba(11,42,107,0.06), transparent 55%),
+              linear-gradient(180deg, #ffffff, #f7f9fc);
+}
+
+/* Topbar */
+.adminTopbar {
+  height: 72px;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.adminBrand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.adminBrandIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  box-shadow: 0 14px 30px rgba(29,78,216,0.28);
+}
+
+.adminBrandIcon svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.adminBrandTitle {
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--text);
+  letter-spacing: -0.3px;
+}
+
+.adminBrandSub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* Top actions */
+.adminTopActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.adminLinkBtn {
+  border: 0;
+  background: rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  color: rgba(15, 23, 42, 0.82);
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-weight: 900;
+  font-size: 13px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 200ms var(--ease), background 200ms var(--ease);
+}
+
+.adminLinkBtn:hover {
+  transform: translateY(-1px);
+  background: rgba(15, 23, 42, 0.08);
+}
+
+.adminTopIcon {
+  color: var(--primary);
+  font-size: 14px;
+}
+
+/* Body grid */
+.adminBody {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: calc(100vh - 72px);
+}
+
+/* Sidebar */
+.adminSidebar {
+  background: rgba(255,255,255,0.86);
+  backdrop-filter: blur(14px);
+  border-right: 1px solid rgba(15, 23, 42, 0.08);
+  padding: 14px;
+}
+
+.adminSideItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 12px;
+  border-radius: 14px;
+  color: rgba(15, 23, 42, 0.85);
+  text-decoration: none;
+  font-weight: 900;
+  margin-bottom: 10px;
+  border: 1px solid transparent;
+  transition: background 200ms var(--ease), transform 200ms var(--ease), border-color 200ms var(--ease);
+}
+
+.adminSideItem:hover {
+  transform: translateY(-1px);
+  background: rgba(29,78,216,0.06);
+  border-color: rgba(29,78,216,0.16);
+}
+
+.adminSideItem.active {
+  background: rgba(29,78,216,0.10);
+  color: var(--primary);
+  border-color: rgba(29,78,216,0.20);
+}
+
+.adminSideIcon {
+  color: var(--primary);
+  font-size: 15px;
+}
+
+/* Content */
+.adminContent {
+  padding: 22px;
+}
+
+.adminPageTitle {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -0.4px;
+}
+
+.adminPageSub {
+  margin: 8px 0 18px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Cards list */
+.adminCards {
+  display: grid;
+  gap: 14px;
+}
+
+/* Card */
+.adminCard {
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  border-radius: 16px;
+  box-shadow: var(--shadowSm);
+  overflow: hidden;
+  transition: transform 220ms var(--ease), box-shadow 220ms var(--ease), border-color 220ms var(--ease);
+}
+
+.adminCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadowMd);
+  border-color: rgba(29,78,216,0.18);
+}
+
+.adminCardPad {
+  padding: 16px;
+}
+
+.adminCardTop {
+  padding: 16px 16px 0;
+}
+
+.adminNameRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.adminPatientName {
+  font-weight: 900;
+  color: var(--text);
+  font-size: 14px;
+}
+
+/* Badge */
+.adminBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+  border: 1px solid transparent;
+}
+
+.badgeIcon {
+  font-size: 13px;
+}
+
+.adminBadge.cancelled {
+  background: rgba(239, 68, 68, 0.14);
+  color: #b91c1c;
+  border-color: rgba(239, 68, 68, 0.22);
+}
+
+.adminBadge.pending {
+  background: rgba(245, 158, 11, 0.16);
+  color: #7a4a00;
+  border-color: rgba(245, 158, 11, 0.26);
+}
+
+.adminBadge.approved {
+  background: rgba(16, 185, 129, 0.14);
+  color: #065f46;
+  border-color: rgba(16, 185, 129, 0.25);
+}
+
+.adminDoctorLine {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Info grid */
+.adminInfoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 14px 16px;
+}
+
+.adminInfoCol {
+  display: grid;
+  gap: 8px;
+}
+
+.adminInfoItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  color: rgba(15, 23, 42, 0.80);
+  background: rgba(29, 78, 216, 0.06);
+  border: 1px solid rgba(29, 78, 216, 0.10);
+  padding: 8px 10px;
+  border-radius: 999px;
+  width: fit-content;
+}
+
+.adminInfoIcon {
+  color: var(--primary);
+  font-size: 13px;
+}
+
+/* Notes */
+.adminNotes {
+  padding: 0 16px 14px;
+  color: rgba(15, 23, 42, 0.86);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Divider */
+.adminDivider {
+  height: 1px;
+  background: rgba(15, 23, 42, 0.08);
+  margin: 0 16px;
+}
+
+/* Actions */
+.adminActions {
+  padding: 14px 16px 16px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Buttons */
+.adminBtn {
+  border: 0;
+  cursor: pointer;
+  border-radius: 14px;
+  padding: 10px 12px;
+  font-weight: 900;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 200ms var(--ease), box-shadow 200ms var(--ease), filter 200ms var(--ease), background 200ms var(--ease);
+}
+
+.adminBtnSuccess {
+  background: rgba(16, 185, 129, 0.14);
+  border: 1px solid rgba(16, 185, 129, 0.24);
+  color: #065f46;
+}
+
+.adminBtnSuccess:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 34px rgba(16,185,129,0.18);
+}
+
+.adminBtnDanger {
+  background: rgba(239, 68, 68, 0.14);
+  border: 1px solid rgba(239, 68, 68, 0.24);
+  color: #b91c1c;
+}
+
+.adminBtnDanger:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 34px rgba(239,68,68,0.18);
+}
+
+.adminBtnGhost {
+  background: rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  color: rgba(15, 23, 42, 0.82);
+}
+
+.adminBtnGhost:hover {
+  transform: translateY(-1px);
+  background: rgba(15, 23, 42, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .adminBody {
+    grid-template-columns: 1fr;
+  }
+
+  .adminSidebar {
+    display: flex;
+    gap: 10px;
+    border-right: none;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    overflow-x: auto;
+  }
+
+  .adminSideItem {
+    margin-bottom: 0;
+    white-space: nowrap;
+  }
+
+  .adminContent {
+    padding: 18px;
+  }
+
+  .adminInfoGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Admin Add Layout (replaces bootstrap row/col) ===== */
+.adminGrid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 16px;
+  align-items: start;
+}
+
+.adminGridMain {
+  min-width: 0;
+}
+
+.adminGridSide {
+  min-width: 0;
+}
+
+/* Form */
+.adminForm {
+  display: grid;
+  gap: 14px;
+}
+
+.adminField label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 900;
+  margin-bottom: 6px;
+  color: rgba(15, 23, 42, 0.85);
+}
+
+.adminFieldIcon {
+  color: var(--primary);
+  font-size: 13px;
+}
+
+.adminField input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  outline: none;
+  font-family: inherit;
+  font-size: 13px;
+  background: rgba(255,255,255,0.9);
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.adminField input:focus {
+  border-color: rgba(29, 78, 216, 0.45);
+  box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.12);
+}
+
+/* Create button */
+.adminCreateBtn {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+  color: #fff;
+  font-weight: 900;
+  font-size: 13px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 14px 30px rgba(29, 78, 216, 0.30);
+  transition: transform 200ms var(--ease), box-shadow 200ms var(--ease), filter 200ms var(--ease);
+}
+
+.adminCreateBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 40px rgba(29, 78, 216, 0.45);
+  filter: brightness(1.03);
+}
+
+/* Right title */
+.adminRightTitle {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--text);
+}
+
+/* Doctors list (if you use it) */
+.adminDocList {
+  display: grid;
+  gap: 10px;
+}
+
+.adminDocItem {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 10px;
+  border-radius: 14px;
+  background: rgba(29, 78, 216, 0.06);
+  border: 1px solid rgba(29, 78, 216, 0.10);
+}
+
+.adminDocAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: rgba(29, 78, 216, 0.14);
+  color: var(--primary);
+}
+
+.adminDocName {
+  font-weight: 900;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.adminDocSpec {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .adminGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -10,6 +10,9 @@ import ContactUs from "./pages/ContactUs";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import AdminLogin from "./pages/AdminLogin";
+import AdminManage from "./pages/AdminManage";
+import AdminAdd from "./pages/AdminAdd";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // start logged out (demo)
@@ -17,6 +20,7 @@ export default function App() {
   const handleLogout = () => {
     setIsLoggedIn(false);
   };
+const adminLoggedIn = localStorage.getItem("admin_logged_in") === "true";
 
   return (
     <>
@@ -46,6 +50,19 @@ export default function App() {
         <Route path="/signup" element={<Signup />} />
 
         <Route path="*" element={<Navigate to="/" replace />} />
+
+        <Route path="/admin" element={<AdminLogin />} />
+
+<Route
+  path="/admin/manage"
+  element={adminLoggedIn ? <AdminManage /> : <Navigate to="/admin" replace />}
+/>
+
+<Route
+  path="/admin/add"
+  element={adminLoggedIn ? <AdminAdd /> : <Navigate to="/admin" replace />}
+/>
+
       </Routes>
     </>
   );
