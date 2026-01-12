@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
 import "../components/css/Home.css";
-
 import { FaTooth, FaShieldAlt, FaHeart, FaClock } from "react-icons/fa";
-import { FaAward, FaSmile } from "react-icons/fa";
-import { FaStar, FaScrewdriver, FaVial, FaCrown } from "react-icons/fa";
+import { FaAward, FaSmile} from "react-icons/fa";
+import {
+  FaStar,
+  FaScrewdriver,
+  FaVial,
+  FaCrown,
+} from "react-icons/fa";
 import { FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa";
+
 
 function Home() {
   return (
@@ -29,8 +34,8 @@ function Home() {
                 Book Appointment <span className="btnArrow">›</span>
               </Link>
 
-              <Link className="btnOutline" to="/appointments">
-                View Appointments
+              <Link className="btnOutline" to="/contact">
+                Contact Us
               </Link>
             </div>
           </div>
@@ -105,7 +110,7 @@ function Home() {
                 <FaClock />
               </div>
               <h3>Emergency Services</h3>
-              <p>Support for urgent dental needs during working hours.</p>
+              <p>24/7 availability for dental emergencies.</p>
             </div>
           </div>
         </div>
@@ -126,27 +131,28 @@ function Home() {
             </h2>
 
             <p className="whyText">
-              At DentalCare, we combine technology with compassionate care to
-              deliver excellent dental services.
+              At DentalCare, we combine cutting-edge technology with
+              compassionate care to deliver exceptional dental services.
             </p>
 
             <ul className="whyList">
-              <li>
-                <FaAward className="whyIcon" />
-                Award-Winning Team
-              </li>
-              <li>
-                <FaSmile className="whyIcon" />
-                Patient-Centered Approach
-              </li>
-              <li>
-                <FaShieldAlt className="whyIcon" />
-                Safety First
-              </li>
-            </ul>
+  <li>
+    <FaAward className="whyIcon" />
+    Award-Winning Team
+  </li>
+  <li>
+    <FaSmile className="whyIcon" />
+    Patient-Centered Approach
+  </li>
+  <li>
+    <FaShieldAlt className="whyIcon" />
+    Safety First
+  </li>
+</ul>
 
-            <Link className="learnMore" to="/appointments">
-              View Appointments <span>›</span>
+
+            <Link className="learnMore" to="/contact">
+              Learn More About Us <span>›</span>
             </Link>
           </div>
         </div>
@@ -156,55 +162,56 @@ function Home() {
         <div className="containerX">
           <h2 className="sectionTitle">Meet Our Expert Doctors</h2>
           <p className="sectionSub">
-            Our highly qualified dental professionals are committed to providing
-            you with the best care
+            Our highly qualified dental professionals are committed to
+            providing you with the best care
           </p>
 
-          <div className="doctorGrid">
-            <div className="doctorCard">
-              <div className="doctorImg">
-                <img src="/images/ahmad.jpeg" alt="Dr. Ahmad Labadi" />
-              </div>
-              <div className="doctorBody">
-                <div className="doctorName">Dr. Ahmad Labadi</div>
-                <div className="doctorSpec">General Dentistry</div>
-                <div className="doctorMeta">15 years experience</div>
-              </div>
-            </div>
+         <div className="doctorGrid">
+  <div className="doctorCard">
+    <div className="doctorImg">
+      <img src="/images/ahmad.jpeg" alt="Dr. Ahmad Labadi" />
+    </div>
+    <div className="doctorBody">
+      <div className="doctorName">Dr. Ahmad Labadi</div>
+      <div className="doctorSpec">General Dentistry</div>
+      <div className="doctorMeta">15 years experience</div>
+    </div>
+  </div>
 
-            <div className="doctorCard">
-              <div className="doctorImg">
-                <img src="/images/hourani.jpeg" alt="Dr. Abdullah Hourani" />
-              </div>
-              <div className="doctorBody">
-                <div className="doctorName">Dr. Abdullah Hourani</div>
-                <div className="doctorSpec">Orthodontics</div>
-                <div className="doctorMeta">12 years experience</div>
-              </div>
-            </div>
+  <div className="doctorCard">
+    <div className="doctorImg">
+      <img src="/images/hourani.jpeg" alt="Dr. Abdullah Hourani" />
+    </div>
+    <div className="doctorBody">
+      <div className="doctorName">Dr. Abdullah Hourani</div>
+      <div className="doctorSpec">Orthodontics</div>
+      <div className="doctorMeta">12 years experience</div>
+    </div>
+  </div>
 
-            <div className="doctorCard">
-              <div className="doctorImg">
-                <img src="/images/khatib.jpeg" alt="Dr. Omar Khatib" />
-              </div>
-              <div className="doctorBody">
-                <div className="doctorName">Dr. Omar Khatib</div>
-                <div className="doctorSpec">Cosmetic Dentistry</div>
-                <div className="doctorMeta">10 years experience</div>
-              </div>
-            </div>
+  <div className="doctorCard">
+    <div className="doctorImg">
+      <img src="/images/khatib.jpeg" alt="Dr. Omar Khatib" />
+    </div>
+    <div className="doctorBody">
+      <div className="doctorName">Dr. Omar Khatib</div>
+      <div className="doctorSpec">Cosmetic Dentistry</div>
+      <div className="doctorMeta">10 years experience</div>
+    </div>
+  </div>
 
-            <div className="doctorCard">
-              <div className="doctorImg">
-                <img src="/images/omar.jpeg" alt="Dr. Omar Jokhan" />
-              </div>
-              <div className="doctorBody">
-                <div className="doctorName">Dr. Omar Jokhan</div>
-                <div className="doctorSpec">Oral Surgery</div>
-                <div className="doctorMeta">8 years experience</div>
-              </div>
-            </div>
-          </div>
+  <div className="doctorCard">
+    <div className="doctorImg">
+      <img src="/images/omar.jpeg" alt="Dr. Omar Jokhan" />
+    </div>
+    <div className="doctorBody">
+      <div className="doctorName">Dr. Omar Jokhan</div>
+      <div className="doctorSpec">Oral Surgery</div>
+      <div className="doctorMeta">8 years experience</div>
+    </div>
+  </div>
+</div>
+
         </div>
       </section>
 
@@ -217,70 +224,59 @@ function Home() {
 
           <div className="serviceGrid">
             <div className="serviceCard">
-              <div className="serviceTop">
-                <span className="serviceIcon">
-                  <FaTooth />
-                </span>
-                <span className="serviceTime">30 minutes</span>
-              </div>
-              <h3>General Checkup</h3>
-              <p>Comprehensive dental examination and professional cleaning.</p>
-            </div>
+  <div className="serviceTop">
+    <span className="serviceIcon"><FaTooth /></span>
+    <span className="serviceTime">30 minutes</span>
+  </div>
+  <h3>General Checkup</h3>
+  <p>Comprehensive dental examination and professional cleaning.</p>
+</div>
 
-            <div className="serviceCard">
-              <div className="serviceTop">
-                <span className="serviceIcon">
-                  <FaStar />
-                </span>
-                <span className="serviceTime">60 minutes</span>
-              </div>
-              <h3>Teeth Whitening</h3>
-              <p>Professional whitening for a brighter, confident smile.</p>
-            </div>
+<div className="serviceCard">
+  <div className="serviceTop">
+    <span className="serviceIcon"><FaStar /></span>
+    <span className="serviceTime">60 minutes</span>
+  </div>
+  <h3>Teeth Whitening</h3>
+  <p>Professional whitening for a brighter, confident smile.</p>
+</div>
 
-            <div className="serviceCard">
-              <div className="serviceTop">
-                <span className="serviceIcon">
-                  <FaScrewdriver />
-                </span>
-                <span className="serviceTime">90 minutes</span>
-              </div>
-              <h3>Dental Implants</h3>
-              <p>Permanent solution for missing teeth with natural look.</p>
-            </div>
+<div className="serviceCard">
+  <div className="serviceTop">
+    <span className="serviceIcon"><FaScrewdriver /></span>
+    <span className="serviceTime">90 minutes</span>
+  </div>
+  <h3>Dental Implants</h3>
+  <p>Permanent solution for missing teeth with natural look.</p>
+</div>
 
-            <div className="serviceCard">
-              <div className="serviceTop">
-                <span className="serviceIcon">
-                  <FaSmile />
-                </span>
-                <span className="serviceTime">45 minutes</span>
-              </div>
-              <h3>Orthodontic Treatment</h3>
-              <p>Braces and aligners to correct teeth alignment.</p>
-            </div>
+<div className="serviceCard">
+  <div className="serviceTop">
+    <span className="serviceIcon"><FaSmile /></span>
+    <span className="serviceTime">45 minutes</span>
+  </div>
+  <h3>Orthodontic Treatment</h3>
+  <p>Braces and aligners to correct teeth alignment.</p>
+</div>
 
-            <div className="serviceCard">
-              <div className="serviceTop">
-                <span className="serviceIcon">
-                  <FaVial />
-                </span>
-                <span className="serviceTime">60 minutes</span>
-              </div>
-              <h3>Root Canal</h3>
-              <p>Pain-free treatment for infected tooth pulp.</p>
-            </div>
+<div className="serviceCard">
+  <div className="serviceTop">
+    <span className="serviceIcon"><FaVial /></span>
+    <span className="serviceTime">60 minutes</span>
+  </div>
+  <h3>Root Canal</h3>
+  <p>Pain-free treatment for infected tooth pulp.</p>
+</div>
 
-            <div className="serviceCard">
-              <div className="serviceTop">
-                <span className="serviceIcon">
-                  <FaCrown />
-                </span>
-                <span className="serviceTime">60 minutes</span>
-              </div>
-              <h3>Dental Crown</h3>
-              <p>Restore damaged teeth with custom-made crowns.</p>
-            </div>
+<div className="serviceCard">
+  <div className="serviceTop">
+    <span className="serviceIcon"><FaCrown /></span>
+    <span className="serviceTime">60 minutes</span>
+  </div>
+  <h3>Dental Crown</h3>
+  <p>Restore damaged teeth with custom-made crowns.</p>
+</div>
+
           </div>
 
           <div className="centerBtn">
@@ -319,18 +315,18 @@ function Home() {
               Your trusted partner for comprehensive dental care. We’re
               committed to creating beautiful, healthy smiles.
             </p>
-
             <div className="footerSocial">
-              <a className="socialDot" href="#" aria-label="Facebook">
-                <FaFacebookF />
-              </a>
-              <a className="socialDot" href="#" aria-label="LinkedIn">
-                <FaLinkedinIn />
-              </a>
-              <a className="socialDot" href="#" aria-label="Instagram">
-                <FaInstagram />
-              </a>
-            </div>
+  <a className="socialDot" href="#" aria-label="Facebook">
+    <FaFacebookF />
+  </a>
+  <a className="socialDot" href="#" aria-label="LinkedIn">
+    <FaLinkedinIn />
+  </a>
+  <a className="socialDot" href="#" aria-label="Instagram">
+    <FaInstagram />
+  </a>
+</div>
+
           </div>
 
           <div className="footerCol">
@@ -362,9 +358,9 @@ function Home() {
         <div className="footerBottom">
           <span>© 2025 DentalCare Clinic. All rights reserved.</span>
           <span className="footerBottomLinks">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Cookie Policy</a>
+            <Link to="/">Privacy Policy</Link>
+            <Link to="/">Terms of Service</Link>
+            <Link to="/">Cookie Policy</Link>
           </span>
         </div>
       </footer>

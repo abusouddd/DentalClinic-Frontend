@@ -11,12 +11,11 @@ function Login({ setIsLoggedIn }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!email.trim() || !password.trim()) {
+    if (!email || !password) {
       alert("Please fill all fields");
       return;
     }
 
-    // demo login
     setIsLoggedIn(true);
     navigate("/");
   };
@@ -57,10 +56,10 @@ function Login({ setIsLoggedIn }) {
           <p>
             Don’t have an account? <Link to="/signup">Sign up</Link>
           </p>
-
-<p>
+          <p>
             <Link to="/admin">Admin Login</Link>
-          </p>        </div>
+          </p>
+        </div>
       </div>
     </div>
   );

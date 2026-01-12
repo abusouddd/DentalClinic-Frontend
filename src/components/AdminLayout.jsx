@@ -1,14 +1,9 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import "./css/Admin.css";
-import { FaCalendarAlt, FaPlusCircle, FaSignOutAlt } from "react-icons/fa";
+import { FaCalendarAlt, FaPlusCircle, FaSignOutAlt, FaArrowLeft } from "react-icons/fa";
 
-function AdminLayout({ children }) {
+function AdminLayout({ active = "manage", children }) {
   const navigate = useNavigate();
-
-  const handleAdminLogout = () => {
-    localStorage.removeItem("admin_logged_in");
-    navigate("/admin");
-  };
 
   return (
     <div className="adminShell">
@@ -24,7 +19,9 @@ function AdminLayout({ children }) {
         </div>
 
         <div className="adminTopActions">
-          <button className="adminLinkBtn" onClick={handleAdminLogout}>
+
+
+          <button className="adminLinkBtn" onClick={() => navigate("/admin")}>
             <FaSignOutAlt className="adminTopIcon" />
             Logout
           </button>

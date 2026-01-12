@@ -13,7 +13,7 @@ function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!fullName.trim() || !email.trim() || !password.trim() || !confirmPassword.trim()) {
+    if (!fullName || !email || !password || !confirmPassword) {
       alert("Please fill all fields");
       return;
     }
@@ -23,7 +23,6 @@ function Signup() {
       return;
     }
 
-    alert("Account created (demo) ✅");
     navigate("/login");
   };
 

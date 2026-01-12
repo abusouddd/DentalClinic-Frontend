@@ -8,7 +8,9 @@ function ConfirmCancelModal({ isOpen, onClose, onConfirm, appointment }) {
       <div className="ccmBox" onClick={(e) => e.stopPropagation()}>
         <h3 className="ccmTitle">Cancel Appointment?</h3>
 
-        <p className="ccmText">Are you sure you want to cancel this appointment?</p>
+        <p className="ccmText">
+          Are you sure you want to cancel this appointment?
+        </p>
 
         <div className="ccmCard">
           <div className="ccmDoctor">{appointment.doctor}</div>
@@ -24,7 +26,13 @@ function ConfirmCancelModal({ isOpen, onClose, onConfirm, appointment }) {
           <button className="ccmBtnGhost" onClick={onClose}>
             No, Keep It
           </button>
-          <button className="ccmBtnDanger" onClick={onConfirm}>
+          <button
+            className="ccmBtnDanger"
+            onClick={() => {
+              onConfirm();
+              onClose();
+            }}
+          >
             Yes, Cancel
           </button>
         </div>
