@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { FaTooth } from "react-icons/fa";
 import "./css/Navbar.css";
 
-function Navbar() {
+function Navbar({ isLoggedIn, onLogout }) {
   return (
     <header className="navbar">
       <div className="navbar-inner">
@@ -28,9 +28,21 @@ function Navbar() {
             Contact Us
           </NavLink>
 
-          <NavLink to="/profile" className="nav-link">
-            Profile
-          </NavLink>
+          {isLoggedIn ? (
+            <>
+              <NavLink to="/profile" className="nav-link">
+                Profile
+              </NavLink>
+
+              <button className="nav-link" type="button" onClick={onLogout}>
+                Logout
+              </button>
+            </>
+          ) : (
+            <NavLink to="/login" className="nav-link">
+              Login
+            </NavLink>
+          )}
         </nav>
       </div>
     </header>
