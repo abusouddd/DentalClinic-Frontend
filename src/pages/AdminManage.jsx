@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdminLayout from "../components/AdminLayout";
 import "../components/css/Admin.css";
 import {
@@ -15,70 +15,124 @@ import {
   FaTimes,
 } from "react-icons/fa";
 
-function AdminManage() {
-  const [bookings, setBookings] = useState([
-    {
-      id: "1",
-      status: "Pending",
-      doctor: "Dr. Abdullah Hourani",
-      specialty: "General Dentistry",
-      service: "General Checkup",
-      date: "2025-12-16",
-      time: "09:00",
-      fullName: "Nour Abusoud",
-      phone: "+962 7X XXX XXXX",
-      email: "nour@email.com",
-      notes: "Please confirm if it’s okay to come 10 minutes early.",
-    },
-    {
-      id: "2",
-      status: "Approved",
-      doctor: "Dr. Ahmad Labadi",
-      specialty: "Orthodontics",
-      service: "Braces Consultation",
-      date: "2025-12-17",
-      time: "11:00",
-      fullName: "Ahmad Ali",
-      phone: "+962 7X XXX XXXX",
-      email: "ahmad@email.com",
-      notes: "",
-    },
-    {
-      id: "3",
-      status: "Cancelled",
-      doctor: "Dr. Omar Khatib",
-      specialty: "Cosmetic Dentistry",
-      service: "Teeth Cleaning",
-      date: "2025-12-19",
-      time: "10:30",
-      fullName: "Sara Mohammad",
-      phone: "+962 7X XXX XXXX",
-      email: "sara@email.com",
-      notes: "Sensitive teeth.",
-    },
-  ]);
+function AdminManage({ admin, setAdmin }) {
+  const API = "http://localhost:5000";
+  const [bookings, setBookings] = useState([]);
 
-  const approve = (id) => {
-    const updated = bookings.map((b) =>
-      b.id === id ? { ...b, status: "Approved" } : b
-    );
-    setBookings(updated);
+  const getAdminId = () => {
+    const savedAdmin = localStorage.getItem("admin");
+    if (!savedAdmin) return null;
+    const a = JSON.parse(savedAdmin);
+    return a.adminid || a.AdminID;
   };
 
-  const reject = (id) => {
-    const updated = bookings.map((b) =>
-      b.id === id ? { ...b, status: "Cancelled" } : b
-    );
-    setBookings(updated);
+  useEffect(() => {
+    const adminId = getAdminId();
+    if (!adminId) return;
+
+    fetch(`${API}/api/bookings`, {
+      headers: { "x-admin-id": adminId },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const mapped = data.map((b) => ({
+          id: b.bookedappointmentid,
+          status: b.status,
+          doctor: b.doctorname,
+          specialty: b.role,
+          service: b.service,
+          date: b.date,
+          time: b.time,
+          fullName: b.patientname,
+          phone: b.patientphone,
+          email: b.patientemail,
+          notes: b.notes || "",
+        }));
+        setBookings(mapped);
+      })
+      .catch(() => setBookings([]));
+  }, []);
+
+  const approve = async (id) => {
+    const adminId = getAdminId();
+    if (!adminId) return;
+
+    try {
+      const res = await fetch(`${API}/api/bookings/${id}/status`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "x-admin-id": adminId,
+        },
+        body: JSON.stringify({ status: "Approved" }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        alert(data.message || data.error || "Approve failed");
+        return;
+      }
+
+      setBookings((prev) =>
+        prev.map((b) => (b.id === id ? { ...b, status: "Approved" } : b))
+      );
+    } catch {
+      alert("Server error");
+    }
   };
 
-  const remove = (id) => {
-    const updated = bookings.filter((b) => b.id !== id);
-    setBookings(updated);
+  const reject = async (id) => {
+    const adminId = getAdminId();
+    if (!adminId) return;
+
+    try {
+      const res = await fetch(`${API}/api/bookings/${id}/status`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "x-admin-id": adminId,
+        },
+        body: JSON.stringify({ status: "Rejected" }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        alert(data.message || data.error || "Reject failed");
+        return;
+      }
+
+      setBookings((prev) =>
+        prev.map((b) => (b.id === id ? { ...b, status: "Rejected" } : b))
+      );
+    } catch {
+      alert("Server error");
+    }
+  };
+
+  const remove = async (id) => {
+    const adminId = getAdminId();
+    if (!adminId) return;
+
+    try {
+      const res = await fetch(`${API}/api/bookings/${id}`, {
+        method: "DELETE",
+        headers: { "x-admin-id": adminId },
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        alert(data.message || data.error || "Delete failed");
+        return;
+      }
+
+      setBookings((prev) => prev.filter((b) => b.id !== id));
+    } catch {
+      alert("Server error");
+    }
   };
 
   return (
-    <AdminLayout active="manage">
+    <AdminLayout active="manage" setAdmin={setAdmin}>
       <h2 className="adminPageTitle">Manage Appointments</h2>
       <p className="adminPageSub">View and manage all appointment requests</p>
 
@@ -97,16 +151,18 @@ function AdminManage() {
                 <div className="adminNameRow">
                   <div className="adminPatientName">{b.fullName}</div>
 
-                  {b.status === "Cancelled" && (
+                  {b.status === "Rejected" && (
                     <span className="adminBadge cancelled">
                       <FaTimesCircle className="badgeIcon" /> Cancelled
                     </span>
                   )}
+
                   {b.status === "Pending" && (
                     <span className="adminBadge pending">
                       <FaClock className="badgeIcon" /> Pending
                     </span>
                   )}
+
                   {b.status === "Approved" && (
                     <span className="adminBadge approved">
                       <FaCheckCircle className="badgeIcon" /> Approved
@@ -158,32 +214,20 @@ function AdminManage() {
               <div className="adminActions">
                 {b.status === "Pending" ? (
                   <>
-                    <button
-                      className="adminBtn adminBtnSuccess"
-                      onClick={() => approve(b.id)}
-                    >
+                    <button className="adminBtn adminBtnSuccess" onClick={() => approve(b.id)}>
                       <FaCheck /> Approve
                     </button>
 
-                    <button
-                      className="adminBtn adminBtnDanger"
-                      onClick={() => reject(b.id)}
-                    >
+                    <button className="adminBtn adminBtnDanger" onClick={() => reject(b.id)}>
                       <FaTimes /> Reject
                     </button>
 
-                    <button
-                      className="adminBtn adminBtnGhost"
-                      onClick={() => remove(b.id)}
-                    >
+                    <button className="adminBtn adminBtnGhost" onClick={() => remove(b.id)}>
                       <FaTrash /> Delete
                     </button>
                   </>
                 ) : (
-                  <button
-                    className="adminBtn adminBtnGhost"
-                    onClick={() => remove(b.id)}
-                  >
+                  <button className="adminBtn adminBtnGhost" onClick={() => remove(b.id)}>
                     <FaTrash /> Delete
                   </button>
                 )}

@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Navbar from "./components/Navbar";
 
@@ -15,48 +15,66 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminManage from "./pages/AdminManage";
 import AdminAdd from "./pages/AdminAdd";
 
-function AppRoutes({ isLoggedIn, setIsLoggedIn }) {
+function AppRoutes({ user, setUser, admin, setAdmin }) {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/admin");
 
-  const adminLoggedIn = localStorage.getItem("admin_logged_in") === "true";
-
   return (
     <>
-      {!isAdminRoute && <Navbar isLoggedIn={isLoggedIn} />}
+      {!isAdminRoute && <Navbar user={user} />}
 
       <Routes>
         <Route path="/" element={<Home />} />
-
-        <Route path="/appointments" element={<Appointments isLoggedIn={isLoggedIn} />} />
-
-        <Route path="/my-appointments" element={<MyAppointments />} />
+        <Route path="/appointments" element={<Appointments user={user} />} />
         <Route path="/contact" element={<ContactUs />} />
 
-        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/login"
+          element={user ? <Navigate to="/" replace /> : <Login setUser={setUser} />}
+        />
+
+        <Route
+          path="/signup"
+          element={user ? <Navigate to="/profile" replace /> : <Signup />}
+        />
+
+        <Route
+          path="/my-appointments"
+          element={user ? <MyAppointments user={user} /> : <Navigate to="/login" replace />}
+        />
 
         <Route
           path="/profile"
+          element={user ? <Profile setUser={setUser} /> : <Navigate to="/login" replace />}
+        />
+
+        <Route
+          path="/admin"
           element={
-            isLoggedIn ? (
-              <Profile setIsLoggedIn={setIsLoggedIn} />
+            admin ? <Navigate to="/admin/manage" replace /> : <AdminLogin setAdmin={setAdmin} />
+          }
+        />
+
+        <Route
+          path="/admin/manage"
+          element={
+            admin ? (
+              <AdminManage admin={admin} setAdmin={setAdmin} />
             ) : (
-              <Navigate to="/login" replace />
+              <Navigate to="/admin" replace />
             )
           }
         />
 
-        <Route path="/admin" element={<AdminLogin />} />
-
-        <Route
-          path="/admin/manage"
-          element={adminLoggedIn ? <AdminManage /> : <Navigate to="/admin" replace />}
-        />
-
         <Route
           path="/admin/add"
-          element={adminLoggedIn ? <AdminAdd /> : <Navigate to="/admin" replace />}
+          element={
+            admin ? (
+              <AdminAdd admin={admin} setAdmin={setAdmin} />
+            ) : (
+              <Navigate to="/admin" replace />
+            )
+          }
         />
 
         <Route path="*" element={<Navigate to="/" replace />} />
@@ -66,11 +84,25 @@ function AppRoutes({ isLoggedIn, setIsLoggedIn }) {
 }
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
+  const [admin, setAdmin] = useState(null);
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+    const savedAdmin = localStorage.getItem("admin");
+
+    if (savedUser) setUser(JSON.parse(savedUser));
+    if (savedAdmin) setAdmin(JSON.parse(savedAdmin));
+  }, []);
 
   return (
     <BrowserRouter>
-      <AppRoutes isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      <AppRoutes
+        user={user}
+        setUser={setUser}
+        admin={admin}
+        setAdmin={setAdmin}
+      />
     </BrowserRouter>
   );
 }

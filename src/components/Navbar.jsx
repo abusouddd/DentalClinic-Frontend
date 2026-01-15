@@ -2,11 +2,10 @@ import { NavLink } from "react-router-dom";
 import { FaTooth } from "react-icons/fa";
 import "../components/css/Navbar.css";
 
-function Navbar({ isLoggedIn }) {
+function Navbar({ user }) {
   return (
     <header className="navbar">
       <div className="navbar-inner">
-
         <NavLink to="/" end className="navbar-logo">
           <FaTooth className="logo-icon" />
           <span>Abo Hourani</span>
@@ -21,15 +20,17 @@ function Navbar({ isLoggedIn }) {
             Appointments
           </NavLink>
 
-          <NavLink to="/my-appointments" className="nav-link">
-            My Appointments
-          </NavLink>
+          {user && (
+            <NavLink to="/my-appointments" className="nav-link">
+              My Appointments
+            </NavLink>
+          )}
 
           <NavLink to="/contact" className="nav-link">
             Contact Us
           </NavLink>
 
-          {isLoggedIn ? (
+          {user ? (
             <NavLink to="/profile" className="nav-btn">
               Profile
             </NavLink>
@@ -39,7 +40,6 @@ function Navbar({ isLoggedIn }) {
             </NavLink>
           )}
         </nav>
-
       </div>
     </header>
   );

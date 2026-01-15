@@ -4,14 +4,18 @@ import "../components/css/Auth.css";
 import { FaUserPlus } from "react-icons/fa";
 
 function Signup() {
+  const API = "http://localhost:5000";
   const navigate = useNavigate();
+
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
     if (!fullName || !email || !password || !confirmPassword) {
       alert("Please fill all fields");
@@ -23,7 +27,24 @@ function Signup() {
       return;
     }
 
-    navigate("/login");
+    try {
+      const res = await fetch(`${API}/api/auth/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: fullName, email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || data.error || "Signup failed");
+        return;
+      }
+
+      navigate("/login");
+    } catch {
+      setError("Server error. Please try again.");
+    }
   };
 
   return (
@@ -68,6 +89,8 @@ function Signup() {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
+
+          {error && <p style={{ color: "red", marginTop: 8 }}>{error}</p>}
 
           <button className="authButton" type="submit">
             Create Account

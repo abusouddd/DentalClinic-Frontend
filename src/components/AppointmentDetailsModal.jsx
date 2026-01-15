@@ -36,7 +36,15 @@ function AppointmentDetailsModal({ isOpen, onClose, appointment }) {
 
           <div className="admRow">
             <span className="admLabel">Status</span>
-            <span className={`admBadge ${appointment.status === "Pending" ? "pending" : "confirmed"}`}>
+            <span
+              className={`admBadge ${
+                appointment.status === "Pending"
+                  ? "pending"
+                  : appointment.status === "Rejected"
+                  ? "cancelled"
+                  : "confirmed"
+              }`}
+            >
               {appointment.status}
             </span>
           </div>

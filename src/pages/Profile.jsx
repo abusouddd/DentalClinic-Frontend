@@ -1,20 +1,98 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../components/css/Profile.css";
 
-function Profile({ setIsLoggedIn }) {
-  const [fullName, setFullName] = useState("Nour");
-  const [email, setEmail] = useState("nour@example.com");
+function Profile({ setUser }) {
+  const API = "http://localhost:5000";
+  const navigate = useNavigate();
+
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSave = (e) => {
+  useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+    if (!savedUser) {
+      navigate("/login");
+      return;
+    }
+
+    const user = JSON.parse(savedUser);
+    setFullName(user.name);
+    setEmail(user.email);
+  }, [navigate]);
+
+  const handleSave = async (e) => {
     e.preventDefault();
-    alert("Profile updated (demo)");
+
+    if (!fullName || !email) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    if (newPassword && newPassword !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    const savedUser = localStorage.getItem("user");
+    if (!savedUser) {
+      alert("Please login again");
+      navigate("/login");
+      return;
+    }
+
+    const user = JSON.parse(savedUser);
+
+    const body = {
+      userId: user.userid,
+      name: fullName,
+      email,
+    };
+
+    if (newPassword) {
+      if (!currentPassword) {
+        alert("Enter current password");
+        return;
+      }
+      body.currentPassword = currentPassword;
+      body.newPassword = newPassword;
+    }
+
+    try {
+      const res = await fetch(`${API}/api/auth/update`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.message || "Update failed");
+        return;
+      }
+
+      const updatedUser = { ...user, ...data };
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      setUser(updatedUser);
+
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+
+      alert("Profile updated successfully");
+    } catch {
+      alert("Server error");
+    }
   };
 
   const handleLogout = () => {
-    setIsLoggedIn(false);
+    localStorage.removeItem("user");
+    setUser(null);
+    navigate("/login");
   };
 
   return (

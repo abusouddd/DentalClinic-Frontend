@@ -1,38 +1,44 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MyAppointmentList from "../components/MyAppointmentList";
 import ConfirmCancelModal from "../components/ConfirmCancelModal";
 import AppointmentDetailsModal from "../components/AppointmentDetailsModal";
 import "../components/css/MyAppointments.css";
 
 function MyAppointments() {
-  const [myAppointments, setMyAppointments] = useState([
-    {
-      doctor: "Dr. Abdullah Hourani",
-      service: "General Checkup",
-      date: "2025-12-16",
-      time: "09:00",
-      status: "Confirmed",
-    },
-    {
-      doctor: "Dr. Abdullah Hourani",
-      service: "Braces Consultation",
-      date: "2025-12-17",
-      time: "11:00",
-      status: "Pending",
-    },
-    {
-      doctor: "Dr. Abdullah Hourani",
-      service: "Teeth Cleaning",
-      date: "2025-12-19",
-      time: "10:30",
-      status: "Confirmed",
-    },
-  ]);
+  const API = "http://localhost:5000";
+
+  const [myAppointments, setMyAppointments] = useState([]);
 
   const [cancelOpen, setCancelOpen] = useState(false);
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [selectedAppt, setSelectedAppt] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(null);
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+    if (!savedUser) return;
+
+    const user = JSON.parse(savedUser);
+    const userId = user.userid;
+
+    fetch(`${API}/api/bookings/user/${userId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        const mapped = (data || []).map((b) => ({
+          id: b.bookedappointmentid,
+          doctor: b.doctorname,
+          service: b.service,
+          date: b.date,
+          time: b.time,
+          status: b.status,
+          phone: b.patientphone,
+          email: b.patientemail,
+          notes: b.notes || "",
+        }));
+        setMyAppointments(mapped);
+      })
+      .catch(() => setMyAppointments([]));
+  }, []);
 
   const openCancel = (appt, idx) => {
     setSelectedAppt(appt);
@@ -52,10 +58,27 @@ function MyAppointments() {
     setSelectedIndex(null);
   };
 
-  const confirmCancel = () => {
-    const updated = myAppointments.filter((_, i) => i !== selectedIndex);
-    setMyAppointments(updated);
-    closeAll();
+  const confirmCancel = async () => {
+    if (!selectedAppt) return;
+
+    try {
+      const res = await fetch(`${API}/api/bookings/${selectedAppt.id}`, {
+        method: "DELETE",
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.message || data.error || "Cancel failed");
+        return;
+      }
+
+      setMyAppointments((prev) => prev.filter((a) => a.id !== selectedAppt.id));
+
+      alert("Appointment cancelled ");
+    } catch {
+      alert("Server error");
+    }
   };
 
   return (

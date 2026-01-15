@@ -3,21 +3,43 @@ import { Link, useNavigate } from "react-router-dom";
 import "../components/css/Auth.css";
 import { FaLock } from "react-icons/fa";
 
-function Login({ setIsLoggedIn }) {
+function Login({ setUser }) {
+  const API = "http://localhost:5000";
   const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
     if (!email || !password) {
       alert("Please fill all fields");
       return;
     }
 
-    setIsLoggedIn(true);
-    navigate("/");
+    try {
+      const res = await fetch(`${API}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || data.error || "Login failed");
+        return;
+      }
+
+      localStorage.setItem("user", JSON.stringify(data));
+      setUser(data);
+      navigate("/");
+    } catch {
+      setError("Server error. Please try again.");
+    }
   };
 
   return (
@@ -46,6 +68,8 @@ function Login({ setIsLoggedIn }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+
+          {error && <p style={{ color: "red", marginTop: 8 }}>{error}</p>}
 
           <button className="authButton" type="submit">
             Sign In
