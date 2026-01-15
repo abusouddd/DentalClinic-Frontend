@@ -1,46 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BookingModal from "../components/BookingModal";
 import "../components/css/Appointments.css";
 import { FaCalendarAlt, FaClock, FaUserMd } from "react-icons/fa";
 
-function Appointments({ isLoggedIn }) {
+function Appointments({ user }) {
+  const API = "http://localhost:5000";
   const navigate = useNavigate();
 
-  const dummySlots = [
-    {
-      id: "1",
-      doctor: "Dr. Ahmad",
-      specialty: "Dermatology",
-      service: "Skin Check",
-      date: "2025-12-20",
-      time: "10:00 AM",
-    },
-    {
-      id: "2",
-      doctor: "Dr. Sara",
-      specialty: "Dentistry",
-      service: "Teeth Cleaning",
-      date: "2025-12-21",
-      time: "01:30 PM",
-    },
-    {
-      id: "3",
-      doctor: "Dr. Omar",
-      specialty: "Cardiology",
-      service: "ECG",
-      date: "2025-12-22",
-      time: "05:00 PM",
-    },
-  ];
-
-  const [slots] = useState(dummySlots);
+  const [slots, setSlots] = useState([]);
   const [bookings, setBookings] = useState([]);
   const [open, setOpen] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState(null);
 
+  useEffect(() => {
+    fetch(`${API}/api/appointments/available`)
+      .then((res) => res.json())
+      .then((data) => {
+        const mapped = (data || []).map((a) => ({
+          id: a.appointmentid,
+          doctor: a.doctorname,
+          specialty: a.role,
+          service: a.service,
+          date: a.date,
+          time: a.time,
+        }));
+        setSlots(mapped);
+      })
+      .catch(() => setSlots([]));
+  }, []);
+
   const handleOpenModal = (slot) => {
-    if (!isLoggedIn) {
+    if (!user) {
       alert("You must login first to book an appointment.");
       navigate("/login");
       return;
@@ -55,26 +46,55 @@ function Appointments({ isLoggedIn }) {
     setSelectedSlot(null);
   };
 
-  const handleConfirmBooking = (patientData) => {
-    const newBooking = {
-      id: Date.now(),
-      status: "Pending",
-      slotId: selectedSlot.id,
+  const handleConfirmBooking = async (patientData) => {
+    if (!selectedSlot) return;
 
-      doctor: selectedSlot.doctor,
-      specialty: selectedSlot.specialty,
-      service: selectedSlot.service,
-      date: selectedSlot.date,
-      time: selectedSlot.time,
+    try {
+      const res = await fetch(`${API}/api/bookings`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          appointmentId: selectedSlot.id,
+          userId: user.userid,
+          patientName: patientData.fullName,
+          patientPhone: patientData.phone,
+          patientEmail: patientData.email,
+          service: selectedSlot.service,
+          notes: patientData.notes,
+        }),
+      });
 
-      fullName: patientData.fullName,
-      phone: patientData.phone,
-      email: patientData.email,
-      notes: patientData.notes,
-    };
+      const data = await res.json();
 
-    setBookings([...bookings, newBooking]);
-    alert("Booking sent ✅ (Pending)");
+      if (!res.ok) {
+        alert(data.message || data.error || "Booking failed");
+        return;
+      }
+
+      setSlots((prev) => prev.filter((s) => s.id !== selectedSlot.id));
+
+      const newBooking = {
+        id: data.bookedappointmentid || Date.now(),
+        status: "Pending",
+        slotId: selectedSlot.id,
+
+        doctor: selectedSlot.doctor,
+        specialty: selectedSlot.specialty,
+        service: selectedSlot.service,
+        date: selectedSlot.date,
+        time: selectedSlot.time,
+
+        fullName: patientData.fullName,
+        phone: patientData.phone,
+        email: patientData.email,
+        notes: patientData.notes,
+      };
+
+      setBookings((prev) => [...prev, newBooking]);
+      alert("Booking sent (Pending)");
+    } catch {
+      alert("Server error");
+    }
   };
 
   return (

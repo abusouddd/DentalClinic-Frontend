@@ -3,12 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import "../components/css/Auth.css";
 import { FaShieldAlt } from "react-icons/fa";
 
-function AdminLogin() {
+function AdminLogin({ setAdmin }) {
+  const API = "http://localhost:5000";
   const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!email || !password) {
@@ -16,8 +18,26 @@ function AdminLogin() {
       return;
     }
 
-    localStorage.setItem("admin_logged_in", "true");
-    navigate("/admin/manage");
+    try {
+      const res = await fetch(`${API}/api/auth/admin/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.message || "Invalid admin credentials");
+        return;
+      }
+
+      localStorage.setItem("admin", JSON.stringify(data));
+      setAdmin(data);
+      navigate("/admin/manage");
+    } catch {
+      alert("Server error");
+    }
   };
 
   return (

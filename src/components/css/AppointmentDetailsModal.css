@@ -138,3 +138,17 @@
   box-shadow: 0 18px 40px rgba(29, 78, 216, 0.45);
   filter: brightness(1.05);
 }
+.admBadge.pending {
+  background: #facc15; 
+  color: #92400e;
+}
+
+.admBadge.confirmed {
+  background: #22c55e; 
+  color: #065f46;
+}
+
+.admBadge.cancelled {
+  background: #ef4444; 
+  color: #7f1d1d;
+}

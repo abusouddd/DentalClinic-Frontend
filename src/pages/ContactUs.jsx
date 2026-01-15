@@ -42,7 +42,7 @@ function ContactUs() {
     axios
       .post("https://api.emailjs.com/api/v1.0/email/send", data)
       .then(() => {
-        setStatus({ type: "success", text: "Message sent successfully ✅" });
+        setStatus({ type: "success", text: "Message sent successfully" });
 
         setFullName("");
         setEmail("");
@@ -55,7 +55,7 @@ function ContactUs() {
         console.error(err);
         setStatus({
           type: "error",
-          text: "Failed to send message ❌ Try again.",
+          text: "Failed to send message Try again.",
         });
 
         setLoading(false);
