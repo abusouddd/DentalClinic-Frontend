@@ -16,7 +16,7 @@ import {
 } from "react-icons/fa";
 
 function AdminManage({ admin, setAdmin }) {
-  const API = "http://localhost:5000";
+  const API = import.meta.env.VITE_API_URL;
   const [bookings, setBookings] = useState([]);
 
   const getAdminId = () => {

@@ -24,7 +24,6 @@ function BookingModal({ isOpen, onClose, slot, onConfirm }) {
       notes,
     });
 
-    // reset + close
     setFullName("");
     setPhone("");
     setEmail("");
