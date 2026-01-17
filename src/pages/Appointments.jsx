@@ -5,7 +5,7 @@ import "../components/css/Appointments.css";
 import { FaCalendarAlt, FaClock, FaUserMd } from "react-icons/fa";
 
 function Appointments({ user }) {
-  const API = "http://localhost:5000";
+  const API = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
   const [slots, setSlots] = useState([]);

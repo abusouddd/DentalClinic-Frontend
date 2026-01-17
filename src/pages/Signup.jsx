@@ -4,7 +4,7 @@ import "../components/css/Auth.css";
 import { FaUserPlus } from "react-icons/fa";
 
 function Signup() {
-  const API = "http://localhost:5000";
+  const API = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
   const [fullName, setFullName] = useState("");

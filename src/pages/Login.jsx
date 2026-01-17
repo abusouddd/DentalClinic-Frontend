@@ -4,7 +4,7 @@ import "../components/css/Auth.css";
 import { FaLock } from "react-icons/fa";
 
 function Login({ setUser }) {
-  const API = "http://localhost:5000";
+  const API = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");

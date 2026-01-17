@@ -5,7 +5,7 @@ import AppointmentDetailsModal from "../components/AppointmentDetailsModal";
 import "../components/css/MyAppointments.css";
 
 function MyAppointments() {
-  const API = "http://localhost:5000";
+  const API = import.meta.env.VITE_API_URL;
 
   const [myAppointments, setMyAppointments] = useState([]);
 
