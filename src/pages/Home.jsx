@@ -212,6 +212,9 @@ function Home() {
   </div>
 </div>
 
+
+    
+
         </div>
       </section>
 
@@ -328,6 +331,8 @@ function Home() {
 </div>
 
           </div>
+
+      
 
           <div className="footerCol">
             <div className="footerTitle">Quick Links</div>
